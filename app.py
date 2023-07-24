@@ -1,12 +1,14 @@
 from flask import Flask, request, render_template
 import os
 import openai 
+from dotenv import load_dotenv
 
-app = Flask(__name__)
+load_dotenv()
 
 # Configure OpenAI API
+openai.api_key = os.environ["OPENAI_API_KEY"]
 
-openai.api_key = " "
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -15,13 +17,13 @@ def index():
 @app.route('/chat', methods=['POST'])
 def chat():
     user_input = request.form["message"]
-    
+
     prompt=f"User: {user_input}\nChat: "
     chat_history = []
     response = openai.Completion.create(    # Call OpenAI API to generate a response
     engine="text-davinci-002",
     prompt=prompt,
-    temperature=0.5
+    temperature=0.5,
     max_tokens=60,
     frequency_penalty=0,
     stop=["\nUser: ", "\nChat:"],
