@@ -6,7 +6,7 @@
 <body>
     <h1>Chatbot Response</h1>
     <p><strong>User Input:</strong> {{ user_input }}</p>
-    <p><strong>Chatbot:</strong> {{ chat }}</p>
+    <p><strong>Chatbot:</strong> {{ chatbot_response }}</p>
     <form method="POST" action="{{ url_for('chat') }}">
         <label for="message">Message: </label>
         <input type="text" id="message" name="message" required>

@@ -5,9 +5,9 @@
 </head>
 <body>
     <h1>Welcome to the Chatbot Demo!</h1>
-    <form action="/chat" method="POST">
-        <label for="user_input">User Input:</label>
-        <input type="text" id="user_input" name="user_input" required>
+    <form action="{{ url_for('chat') }}" method="POST">
+        <label for="message">message: </label>
+        <input type="text" id="message" name="message" required>
         <button type="submit">Send</button>
     </form>
 </body>

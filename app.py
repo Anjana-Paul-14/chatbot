@@ -15,6 +15,7 @@ def index():
 @app.route('/chat', methods=['POST'])
 def chat():
     user_input = request.form["message"]
+    
     prompt=f"User: {user_input}\nChat: "
     chat_history = []
     response = openai.Completion.create(    # Call OpenAI API to generate a response
