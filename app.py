@@ -33,7 +33,7 @@ def chat():
     user_input = request.form["message"]
 
     prompt=f"User: {user_input}\nChat: "
-    chat_history = []
+    # chat_history = []
     response = openai.Completion.create(    # Call OpenAI API to generate a response
     engine="text-davinci-002",
     prompt=prompt,
@@ -49,4 +49,5 @@ def chat():
     chat_entry = Chat(user_input=user_input, chatbot_response=chatbot_response)
     db.session.add(chat_entry)
     db.session.commit()
+    
     return render_template('chat.html', user_input=user_input, chatbot_response=chatbot_response)
