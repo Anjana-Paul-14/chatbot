@@ -3,7 +3,7 @@ import os
 import openai 
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
-
+from datetime import datetime
 
 load_dotenv()
 
@@ -20,6 +20,7 @@ class Chat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_input = db.Column(db.String(255), nullable=False)
     chatbot_response = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 # Create the database tables
 # db.create_all()
 
@@ -46,7 +47,7 @@ def chat():
     chatbot_response = response.choices[0].text.strip()
 
     # chat_history.append(f"User: {user_input}\nChat: {chatbot_response}")
-    chat_entry = Chat(user_input=user_input, chatbot_response=chatbot_response)
+    chat_entry = Chat(user_input=user_input, chatbot_response=chatbot_response, created_at=datetime.utcnow())
     db.session.add(chat_entry)
     db.session.commit()
     
