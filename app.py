@@ -21,7 +21,7 @@ class Chat(db.Model):
     user_input = db.Column(db.String(255), nullable=False)
     chatbot_response = db.Column(db.String(255), nullable=False)
 # Create the database tables
-db.create_all()
+# db.create_all()
 
 
 @app.route('/')
@@ -46,5 +46,7 @@ def chat():
     chatbot_response = response.choices[0].text.strip()
 
     # chat_history.append(f"User: {user_input}\nChat: {chatbot_response}")
-    
+    chat_entry = Chat(user_input=user_input, chatbot_response=chatbot_response)
+    db.session.add(chat_entry)
+    db.session.commit()
     return render_template('chat.html', user_input=user_input, chatbot_response=chatbot_response)
